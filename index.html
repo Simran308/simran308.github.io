@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simran Sharma — A Quarterly Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f4ede0;
+    --paper-light: #faf5ea;
+    --ink: #1a1612;
+    --ink-soft: #4a423a;
+    --ink-faint: #8a8175;
+    --rule: #d8cfbe;
+    --accent: #8b1e1e;
+    --accent-soft: #c97a6e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: var(--paper-light); }
+
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    z-index: 1000;
+    background-image:
+      radial-gradient(circle at 20% 30%, var(--ink) 0.5px, transparent 1px),
+      radial-gradient(circle at 70% 80%, var(--ink) 0.5px, transparent 1px),
+      radial-gradient(circle at 40% 60%, var(--ink) 0.5px, transparent 1px);
+    background-size: 3px 3px, 5px 5px, 7px 7px;
+  }
+
+  .page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 36px;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    padding: 60px 0 30px;
+    border-bottom: 3px double var(--ink);
+  }
+  .masthead-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+  .masthead-meta .dot { display: inline-block; width: 4px; height: 4px; background: var(--accent); border-radius: 50%; vertical-align: middle; margin: 0 8px; }
+  .nameplate {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(56px, 11vw, 132px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+  .nameplate-sub {
+    text-align: center;
+    margin-top: 18px;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    font-family: 'EB Garamond', serif;
+  }
+  .masthead-rules {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* SECTION HEADERS */
+  section { padding: 80px 0; border-bottom: 1px solid var(--rule); }
+  .section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: "";
+    width: 30px; height: 1px; background: var(--accent);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: 28px;
+    max-width: 800px;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* THE LEDE */
+  .lede {
+    columns: 2;
+    column-gap: 50px;
+    column-rule: 1px solid var(--rule);
+    font-size: 19px;
+    line-height: 1.7;
+  }
+  .lede p { margin-bottom: 18px; break-inside: avoid-column; }
+  .lede p:first-child::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 78px;
+    float: left;
+    line-height: 0.9;
+    margin: 6px 10px 0 0;
+    color: var(--accent);
+  }
+  @media (max-width: 720px) { .lede { columns: 1; } }
+
+  /* THE BEAT (current role) */
+  .beat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 50px;
+    align-items: start;
+  }
+  @media (max-width: 720px) { .beat-grid { grid-template-columns: 1fr; } }
+  .beat-side {
+    border-left: 3px solid var(--accent);
+    padding-left: 22px;
+  }
+  .beat-side .role {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .beat-side .company {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 700;
+    margin: 8px 0 6px;
+    line-height: 1;
+  }
+  .beat-side .when {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 17px;
+  }
+  .beat-pull {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.35;
+    margin: 28px 0 0;
+    color: var(--ink);
+    border-top: 1px solid var(--ink);
+    padding-top: 22px;
+  }
+  .beat-pull::before { content: "“"; color: var(--accent); font-size: 50px; line-height: 0; vertical-align: -18px; margin-right: 4px; }
+
+  .work-list { display: flex; flex-direction: column; gap: 22px; }
+  .work-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 18px;
+    padding-bottom: 22px;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .work-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 32px;
+    color: var(--accent);
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .work-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .work-detail {
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .work-tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    padding: 3px 9px;
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+  }
+  @media (max-width: 820px) { .timeline { grid-template-columns: 1fr; } }
+  .episode {
+    background: var(--paper-light);
+    border: 1px solid var(--rule);
+    padding: 28px 24px;
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .episode:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -22px rgba(26,22,18,0.35);
+    border-color: var(--ink);
+  }
+  .episode .ep-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+  .episode .ep-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+  }
+  .episode .ep-where {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .episode .ep-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .episode .ep-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    color: var(--ink-soft);
+    font-size: 16.5px;
+    line-height: 1.6;
+  }
+  .episode.open .ep-body { max-height: 600px; padding-top: 12px; border-top: 1px dotted var(--rule); margin-top: 4px; }
+  .episode .ep-toggle {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 14px;
+    display: inline-block;
+  }
+  .episode.open .ep-toggle::after { content: " ↑"; }
+  .episode:not(.open) .ep-toggle::after { content: " ↓"; }
+
+  /* WORKSHOP / SKILLS */
+  .workshop-intro {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 19px;
+    max-width: 640px;
+    margin-bottom: 38px;
+  }
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+  @media (max-width: 820px) { .skill-grid { grid-template-columns: repeat(2, 1fr); } }
+  .skill-cell {
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 22px 18px;
+    transition: background 0.3s, color 0.3s;
+    cursor: default;
+  }
+  .skill-cell:hover { background: var(--ink); color: var(--paper-light); }
+  .skill-cell:hover .sk-cat { color: var(--accent-soft); }
+  .skill-cell .sk-cat {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .skill-cell .sk-list {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    line-height: 1.4;
+  }
+  .skill-cell .sk-list span { display: inline; }
+
+  /* SELECTED STUDIES */
+  .study-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px 60px;
+  }
+  @media (max-width: 820px) { .study-grid { grid-template-columns: 1fr; } }
+  .study .study-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .study .study-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 8px 0 12px;
+  }
+  .study .study-body {
+    color: var(--ink-soft);
+    font-size: 17.5px;
+    line-height: 1.6;
+  }
+  .study .study-stack {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* INTERVIEW */
+  .interview-frame {
+    background: var(--paper-light);
+    border: 1px solid var(--ink);
+    padding: 38px 36px;
+    max-width: 820px;
+  }
+  .interview-q-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .iq-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.25s;
+    border-radius: 999px;
+  }
+  .iq-btn:hover, .iq-btn.active { background: var(--ink); color: var(--paper-light); }
+  .interview-exchange {
+    min-height: 160px;
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+  }
+  .ix-q {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .ix-a {
+    font-family: 'EB Garamond', serif;
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--ink);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.5s 0.15s, transform 0.5s 0.15s;
+  }
+  .ix-q.show, .ix-a.show { opacity: 1; transform: translateY(0); }
+  .ix-attribution {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 18px;
+  }
+
+  /* CORRESPONDENCE */
+  .corr-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  @media (max-width: 820px) { .corr-grid { grid-template-columns: 1fr; } }
+  .corr-card {
+    background: var(--paper-light);
+    border: 1px solid var(--ink);
+    padding: 38px 34px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .corr-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px -22px rgba(26,22,18,0.35);
+  }
+  .corr-card--alt {
+    background: var(--ink);
+    color: var(--paper-light);
+    border-color: var(--ink);
+  }
+  .corr-card--alt .corr-title { color: var(--paper-light); }
+  .corr-card--alt .corr-body { color: var(--paper-light); opacity: 0.82; }
+  .corr-num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+  }
+  .corr-card--alt .corr-num { color: var(--accent-soft); }
+  .corr-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .corr-body {
+    font-size: 17.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    flex: 1;
+  }
+  .corr-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .corr-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 13px 20px;
+    border: 1px solid currentColor;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.25s;
+    display: inline-block;
+    cursor: pointer;
+    background: transparent;
+  }
+  .corr-btn:hover { background: var(--ink); color: var(--paper-light); border-color: var(--ink); }
+  .corr-btn.primary {
+    background: var(--ink);
+    color: var(--paper-light);
+    border-color: var(--ink);
+  }
+  .corr-btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--paper-light); }
+  .corr-card--alt .corr-btn {
+    color: var(--paper-light);
+    border-color: var(--paper-light);
+  }
+  .corr-card--alt .corr-btn:hover {
+    background: var(--paper-light);
+    color: var(--ink);
+    border-color: var(--paper-light);
+  }
+  .corr-card--alt .corr-btn.primary {
+    background: var(--paper-light);
+    color: var(--ink);
+    border-color: var(--paper-light);
+  }
+  .corr-card--alt .corr-btn.primary:hover {
+    background: var(--accent);
+    color: var(--paper-light);
+    border-color: var(--accent);
+  }
+  .corr-note {
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    line-height: 1.55;
+    color: var(--ink-faint);
+    padding: 10px 12px;
+    border: 1px dashed currentColor;
+    border-radius: 2px;
+    letter-spacing: 0.02em;
+  }
+  .corr-card--alt .corr-note { color: rgba(244,237,224,0.55); }
+  .corr-note code {
+    background: rgba(255,255,255,0.08);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+  .corr-note.hidden { display: none; }
+  .corr-note.shake { animation: corr-shake 0.4s; }
+  @keyframes corr-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+  .corr-meta {
+    display: flex;
+    gap: 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 18px;
+  }
+  .corr-card--alt .corr-meta { color: rgba(244,237,224,0.5); }
+
+  /* COLOPHON */
+  .colophon {
+    padding: 80px 0 100px;
+    text-align: center;
+  }
+  .colophon-mark {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 56px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .colophon-text {
+    margin: 22px auto 32px;
+    max-width: 560px;
+    font-style: italic;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .colophon-links {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .colophon-links a {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .colophon-links a:hover { color: var(--accent); border-color: var(--accent); }
+  .colophon-foot {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    margin-top: 20px;
+  }
+  .built-tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 999px;
+    margin-top: 14px;
+  }
+
+  /* ANIMATION */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 1s ease, transform 1s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body class="grain">
+
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="masthead-meta">
+      <span>Vol. I &middot; Issue 01</span>
+      <span>An Editorial in One File <span class="dot"></span> Built with Claude</span>
+      <span>Dallas, TX</span>
+    </div>
+    <h1 class="nameplate">Simran Sharma</h1>
+    <p class="nameplate-sub">A quarterly review of one analyst&rsquo;s adventures in data, decisions, and building from scratch.</p>
+    <div class="masthead-rules">
+      <span>Est. 2024 &middot; UT Dallas</span>
+      <span>April 2026</span>
+      <span>$0.00 &middot; Free Read</span>
+    </div>
+  </header>
+
+  <!-- THE LEDE -->
+  <section class="reveal">
+    <div class="section-label">From the Editor</div>
+    <h2 class="section-title">A note on <em>building</em>, not just reporting.</h2>
+    <div class="lede">
+      <p>Most data careers begin the same way: a spreadsheet, a deadline, and the dawning realization that the file in front of you is the source of truth for an entire team. Mine was no exception. What changed it was not a single tool or a single course, but a slow shift in posture &mdash; from describing what the numbers said, to designing the systems that produced them.</p>
+      <p>The interesting questions, I&rsquo;ve learned, arrive earlier in the chain. Less &ldquo;what does this number mean?&rdquo; and more &ldquo;why is this the number we see, and who will need to see a different one tomorrow?&rdquo; The work moves accordingly &mdash; from the report on the screen to the quieter machinery underneath it. (The specifics of that machinery are catalogued on the next page.)</p>
+      <p>This issue is a small archive of how the posture was earned &mdash; from a data-ops desk in India, through a master&rsquo;s in business analytics in Texas, to the present moment at Samsara, where the role on paper says <em>analyst</em> and the work, on most days, says something closer to <em>builder</em>.</p>
+      <p>Read at leisure. Skim if you must. The footnotes are doing most of the work.</p>
+    </div>
+  </section>
+
+  <!-- THE BEAT -->
+  <section class="reveal">
+    <div class="section-label">The Beat &middot; Currently</div>
+    <h2 class="section-title">At <em>Samsara</em>, the job is to make data trustworthy on purpose.</h2>
+    <div class="beat-grid">
+      <aside class="beat-side">
+        <div class="role">Product Data Management Specialist</div>
+        <div class="company">Samsara</div>
+        <div class="when">Dallas &middot; Jul 2024 &mdash; Present</div>
+        <p class="beat-pull">The interesting problem isn&rsquo;t the dashboard. It&rsquo;s the chain of decisions <em>upstream</em> of the dashboard.</p>
+      </aside>
+
+      <div class="work-list">
+        <div class="work-item">
+          <div class="work-num">01</div>
+          <div>
+            <div class="work-headline">Built a Genie agent in Databricks for supply-chain Q&amp;A.</div>
+            <div class="work-detail">Stood up a natural-language interface so business users can interrogate supply-chain data without writing SQL or filing a ticket &mdash; turning a slow back-and-forth into a self-serve loop.</div>
+            <div class="work-tags"><span class="tag">Databricks</span><span class="tag">Genie</span><span class="tag">LLM</span><span class="tag">SQL</span></div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-num">02</div>
+          <div>
+            <div class="work-headline">Replaced manual master-data spreadsheets with an internal web app.</div>
+            <div class="work-detail">Designed and developed the Product Master Data webapp from the ground up, eliminating the spreadsheet-of-record bottleneck that previously gated changes across systems.</div>
+            <div class="work-tags"><span class="tag">Webapp</span><span class="tag">Master Data</span><span class="tag">Process Design</span></div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-num">03</div>
+          <div>
+            <div class="work-headline">Authored the supply-chain workflows and tables in Databricks.</div>
+            <div class="work-detail">Engineered the pipelines, schemas, and orchestrations that move supply-chain data from source to consumption &mdash; the unglamorous, load-bearing layer that makes every downstream report possible.</div>
+            <div class="work-tags"><span class="tag">Databricks Workflows</span><span class="tag">Data Modeling</span><span class="tag">Spark</span></div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-num">04</div>
+          <div>
+            <div class="work-headline">Tableau dashboards for demand planning &amp; forecast accuracy.</div>
+            <div class="work-detail">Interactive views that let planners slice forecast performance by product, region, and horizon &mdash; closing the loop between models and the humans who act on them.</div>
+            <div class="work-tags"><span class="tag">Tableau</span><span class="tag">Forecasting</span></div>
+          </div>
+        </div>
+
+        <div class="work-item" style="border-bottom:none;">
+          <div class="work-num">05</div>
+          <div>
+            <div class="work-headline">Wrote the Master Data Dictionary across supply-chain systems.</div>
+            <div class="work-detail">Mapped the process flow and traced the business impact of each data element across systems &mdash; the document people actually open before making a schema change.</div>
+            <div class="work-tags"><span class="tag">Documentation</span><span class="tag">Data Governance</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="reveal">
+    <div class="section-label">A Brief History &middot; In Three Acts</div>
+    <h2 class="section-title">The career, told in <em>chapters</em>.</h2>
+    <p class="workshop-intro">Click any chapter to expand. The order is chronological; the lessons less so.</p>
+
+    <div class="timeline">
+      <article class="episode" data-ep="1">
+        <div class="ep-num">Chapter I</div>
+        <div class="ep-title">Data Operations Analyst</div>
+        <div class="ep-where">G2, Inc &middot; India</div>
+        <div class="ep-date">Aug 2019 &mdash; Jun 2022</div>
+        <div class="ep-body">
+          The apprenticeship years. Wrangled 10K+ Salesforce accounts into Asana-driven workflows; built a paid-promotions dashboard that lifted reporting revenue 25%; consolidated product, category, and vendor sheets with VBA macros, cutting processing time 70%. Wrote a Python web-scraper that automated 15K vendor-rating pulls and reclaimed 85% of the previous time budget. Learned that the most valuable thing an analyst owns is a clean, documented process.
+        </div>
+        <div class="ep-toggle">Expand</div>
+      </article>
+
+      <article class="episode" data-ep="2">
+        <div class="ep-num">Chapter II</div>
+        <div class="ep-title">MS, Business Analytics</div>
+        <div class="ep-where">UT Dallas &middot; Texas</div>
+        <div class="ep-date">Aug 2022 &mdash; May 2024</div>
+        <div class="ep-body">
+          The reframing years. GPA 3.78, Scholar with Recognition, and first prize in the Alteryx Datathon among 200 students. Coursework spanned applied ML, causal analytics &amp; A/B testing, big data on Spark/Hive, and prescriptive modeling. Interned at Western Dental as a Data Analyst &mdash; built a self-pay-revenue table over 5M+ records, automated monthly reporting 50% via Power BI, and integrated insurance data through Python. Walked out with the language to talk about systems, not just spreadsheets.
+        </div>
+        <div class="ep-toggle">Expand</div>
+      </article>
+
+      <article class="episode" data-ep="3">
+        <div class="ep-num">Chapter III</div>
+        <div class="ep-title">Product Data Management Specialist</div>
+        <div class="ep-where">Samsara &middot; Dallas</div>
+        <div class="ep-date">Jul 2024 &mdash; Present</div>
+        <div class="ep-body">
+          The building years. Shipping a Databricks Genie agent for supply-chain self-serve, the Product Master Data webapp that retired a stack of manual sheets, and the Databricks workflows and tables underneath the entire supply-chain reporting surface. Authored the Master Data Dictionary that defines how the company talks about its own data. The job title says &ldquo;analyst.&rdquo; The work is closer to platform.
+        </div>
+        <div class="ep-toggle">Expand</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- WORKSHOP -->
+  <section class="reveal">
+    <div class="section-label">The Workshop</div>
+    <h2 class="section-title">Tools of the <em>trade</em>.</h2>
+    <p class="workshop-intro">A working inventory &mdash; languages, warehouses, and the BI surface where the work meets the reader.</p>
+
+    <div class="skill-grid">
+      <div class="skill-cell">
+        <div class="sk-cat">Languages</div>
+        <div class="sk-list">SQL <span>&middot;</span> Python <span>&middot;</span> R <span>&middot;</span> SAS <span>&middot;</span> C / C++</div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-cat">Warehousing</div>
+        <div class="sk-list">Databricks <span>&middot;</span> BigQuery <span>&middot;</span> Snowflake <span>&middot;</span> Postgres <span>&middot;</span> Spark <span>&middot;</span> Hadoop</div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-cat">Statistics &amp; ML</div>
+        <div class="sk-list">Hypothesis testing <span>&middot;</span> Regression <span>&middot;</span> Classification <span>&middot;</span> Clustering <span>&middot;</span> Time-series <span>&middot;</span> A/B testing</div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-cat">BI &amp; Analytics</div>
+        <div class="sk-list">Tableau <span>&middot;</span> Power BI <span>&middot;</span> Looker <span>&middot;</span> Domo <span>&middot;</span> Adobe Analytics <span>&middot;</span> Google Analytics</div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-cat">Workflow</div>
+        <div class="sk-list">Airflow <span>&middot;</span> Databricks Workflows <span>&middot;</span> Salesforce <span>&middot;</span> Asana <span>&middot;</span> Jira <span>&middot;</span> Confluence</div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-cat">Data Prep</div>
+        <div class="sk-list">Alteryx <span>&middot;</span> Tableau Prep <span>&middot;</span> Pandas <span>&middot;</span> Power Query / DAX</div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-cat">Certifications</div>
+        <div class="sk-list">AWS Academy Data Engineering <span>&middot;</span> Alteryx Designer Core <span>&middot;</span> Agile PM</div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-cat">Recognitions</div>
+        <div class="sk-list">1st &mdash; Alteryx Datathon (200 students) <span>&middot;</span> UTD Scholar with Recognition</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED STUDIES -->
+  <section class="reveal">
+    <div class="section-label">Selected Studies</div>
+    <h2 class="section-title">Field notes from <em>graduate</em> work.</h2>
+
+    <div class="study-grid">
+      <article class="study">
+        <div class="study-kicker">Study No. 01 &middot; 2024</div>
+        <h3 class="study-title">A General Ledger, Dimensionally Modelled.</h3>
+        <p class="study-body">Designed a dimensional model for an accounting general-ledger process and surfaced it through a Looker report on BigQuery &mdash; an ETL exercise in turning transactional noise into reportable structure.</p>
+        <div class="study-stack">
+          <span class="tag">BigQuery</span><span class="tag">Looker</span><span class="tag">GCP</span><span class="tag">ETL</span>
+        </div>
+      </article>
+
+      <article class="study">
+        <div class="study-kicker">Study No. 02 &middot; 2023</div>
+        <h3 class="study-title">YouTube, at 1.2 GB and Rising.</h3>
+        <p class="study-body">Trending video data in HDFS, queried with PySpark and surfaced through Hive &mdash; a small reminder that big-data tooling earns its name only when you finally hand it something genuinely big.</p>
+        <div class="study-stack">
+          <span class="tag">Spark</span><span class="tag">HDFS</span><span class="tag">Sqoop</span><span class="tag">Hive</span>
+        </div>
+      </article>
+
+      <article class="study">
+        <div class="study-kicker">Study No. 03 &middot; 2023</div>
+        <h3 class="study-title">Butter, Margarine &amp; the Market Share Question.</h3>
+        <p class="study-body">Panel-data analysis of brand sales, asking which variables actually move share. Cleaned in Python and Alteryx, modelled in SAS and R, surfaced in a Tableau dashboard with five actionable insights.</p>
+        <div class="study-stack">
+          <span class="tag">SAS</span><span class="tag">R</span><span class="tag">Tableau</span><span class="tag">Alteryx</span>
+        </div>
+      </article>
+
+      <article class="study">
+        <div class="study-kicker">Study No. 04 &middot; 2022</div>
+        <h3 class="study-title">What Makes a Spotify Track Popular?</h3>
+        <p class="study-body">Decision trees, logistic regression, and a random forest that landed at 74% accuracy &mdash; less interesting as a number than as a lesson in choosing the right model for the right question.</p>
+        <div class="study-stack">
+          <span class="tag">R</span><span class="tag">ML</span><span class="tag">EDA</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- INTERVIEW -->
+  <section class="reveal">
+    <div class="section-label">The Interview</div>
+    <h2 class="section-title">Five questions &mdash; <em>posed and answered</em>.</h2>
+    <p class="workshop-intro">A small dialogue with the editor. Pick a question.</p>
+
+    <div class="interview-frame">
+      <div class="interview-q-list" id="qlist">
+        <button class="iq-btn active" data-q="0">What are you actually doing at Samsara?</button>
+        <button class="iq-btn" data-q="1">Why move from analyst to builder?</button>
+        <button class="iq-btn" data-q="2">What changes when an analyst learns Databricks?</button>
+        <button class="iq-btn" data-q="3">Favourite project, and why.</button>
+        <button class="iq-btn" data-q="4">What kind of role are you reading for next?</button>
+      </div>
+
+      <div class="interview-exchange">
+        <div class="ix-q show" id="ixq">What are you actually doing at Samsara?</div>
+        <div class="ix-a show" id="ixa">Three things, mostly. I&rsquo;m building a Databricks Genie agent so people can ask supply-chain questions in English; I&rsquo;m developing a Product Master Data webapp that replaces the manual spreadsheets we used to govern; and I&rsquo;m authoring the Databricks workflows and tables that the supply-chain reporting layer sits on top of. The throughline is reducing the distance between a question and a trustworthy answer.</div>
+        <div class="ix-attribution">&mdash; Simran, on the record</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORRESPONDENCE -->
+  <section class="reveal">
+    <div class="section-label">Correspondence</div>
+    <h2 class="section-title">Reach <em>out</em>.</h2>
+    <p class="workshop-intro">Two paths in. Pick whichever feels less like scheduling overhead.</p>
+
+    <div class="corr-grid">
+      <article class="corr-card">
+        <div class="corr-num">I.</div>
+        <h3 class="corr-title">Drop a line.</h3>
+        <p class="corr-body">For a question, a hello, or a &ldquo;we should talk&rdquo; &mdash; LinkedIn DMs and email are both watched.</p>
+        <div class="corr-actions">
+          <a class="corr-btn primary" href="https://www.linkedin.com/in/the-simran-sharma/" target="_blank" rel="noopener">Message on LinkedIn</a>
+          <a class="corr-btn" href="mailto:simsharma1408@gmail.com?subject=Hello%20from%20your%20portfolio">Send an email</a>
+        </div>
+        <div class="corr-meta">
+          <span>Dallas, TX</span>
+          <span>Reply &lt; 72 hrs</span>
+        </div>
+      </article>
+
+      <article class="corr-card corr-card--alt">
+        <div class="corr-num">II.</div>
+        <h3 class="corr-title">Book a coffee chat.</h3>
+        <p class="corr-body">Thirty minutes, on the calendar, no agenda required. A few slots open each week for new conversations &mdash; recruiters, builders, and the curious are all welcome.</p>
+        <div class="corr-actions">
+          <a class="corr-btn primary" id="bookBtn" href="#" target="_blank" rel="noopener">Open scheduler</a>
+        </div>
+        <div class="corr-note hidden" id="bookNote">
+          Heads up: scheduler URL hasn&rsquo;t been wired up yet. Edit this file and replace <code>SCHEDULER_URL</code> with a Google Calendar appointment-schedule link.
+        </div>
+        <div class="corr-meta">
+          <span>30 minutes</span>
+          <span>Google Meet</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- COLOPHON -->
+  <footer class="colophon">
+    <div class="colophon-mark">&sect;</div>
+    <p class="colophon-text">This page is a single self-contained HTML file &mdash; no framework, no backend, no analytics. Set in <em>Playfair Display</em>, <em>EB Garamond</em>, and <em>JetBrains Mono</em>. Written, coded, and edited in one sitting.</p>
+    <div class="colophon-links">
+      <a href="https://www.linkedin.com/in/the-simran-sharma/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:simsharma1408@gmail.com">Email</a>
+      <a href="tel:+19452333597">Phone</a>
+    </div>
+    <div class="built-tag">Built with Claude &middot; April 2026</div>
+    <div class="colophon-foot">&copy; 2026 Simran Sharma &middot; Dallas, TX &middot; All rights reserved &middot; Set with care.</div>
+  </footer>
+
+</div>
+
+<script>
+  // ============================================================
+  // SCHEDULER — paste your Google Calendar APPOINTMENT-SCHEDULE
+  // URL below. It must look like:
+  //   https://calendar.google.com/calendar/appointments/schedules/AcZssZ...
+  // (NOT https://calendar.google.com/calendar/u/1/r — that one
+  //  just opens the visitor's own calendar, not your booking page.)
+  // To create one: open Google Calendar → click "Create" →
+  //   "Appointment schedule" → set duration & availability → publish →
+  //   copy the public booking link.
+  // ============================================================
+  const SCHEDULER_URL = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3ComcnFX-KBUyRrSAGKW58hGxAY7oWrf-uet_1LDpbu3IhMNRc520kESq8yK8o56f9jUGekEmO";
+
+  (function wireScheduler() {
+    const btn = document.getElementById('bookBtn');
+    const note = document.getElementById('bookNote');
+    const isAppointmentUrl =
+      typeof SCHEDULER_URL === 'string' &&
+      SCHEDULER_URL.includes('/appointments/schedules/');
+
+    if (isAppointmentUrl) {
+      btn.href = SCHEDULER_URL;
+      note.classList.add('hidden');
+    } else {
+      // Show the heads-up note and prevent navigation to a non-booking URL
+      note.classList.remove('hidden');
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        note.classList.remove('shake');
+        // force reflow so the animation re-triggers
+        void note.offsetWidth;
+        note.classList.add('shake');
+      });
+    }
+  })();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Timeline expand
+  document.querySelectorAll('.episode').forEach(ep => {
+    ep.addEventListener('click', () => ep.classList.toggle('open'));
+  });
+
+  // Interview
+  const QA = [
+    {
+      q: "What are you actually doing at Samsara?",
+      a: "Three things, mostly. I'm building a Databricks Genie agent so people can ask supply-chain questions in English; I'm developing a Product Master Data webapp that replaces the manual spreadsheets we used to govern; and I'm authoring the Databricks workflows and tables that the supply-chain reporting layer sits on top of. The throughline is reducing the distance between a question and a trustworthy answer."
+    },
+    {
+      q: "Why move from analyst to builder?",
+      a: "Because the most leverage in analytics isn't the chart &mdash; it's the system that produced it. Once you've spent enough time being the human glue between sources, you start wanting to delete that role. The fastest way to do that is to build the thing. Genie, the webapp, the tables: each of those is a job an analyst used to have to do by hand."
+    },
+    {
+      q: "What changes when an analyst learns Databricks?",
+      a: "Scope. Suddenly you're not asking for a pipeline &mdash; you're authoring one. You can model the table the way the business actually thinks; you can orchestrate it; you can serve it. The mental model shifts from &lsquo;what's in the warehouse?&rsquo; to &lsquo;what should be in the warehouse, and who needs it when?&rsquo;"
+    },
+    {
+      q: "Favourite project, and why.",
+      a: "The Product Master Data webapp, by a margin. It replaces a brittle spreadsheet that lived in too many people's heads with a real piece of software with rules, history, and ownership. Every time someone uses it, a meeting doesn't happen. That's a satisfying kind of work."
+    },
+    {
+      q: "What kind of role are you reading for next?",
+      a: "One where the line between &lsquo;analyst&rsquo; and &lsquo;builder&rsquo; is honestly fuzzy &mdash; data/analytics engineering, product analytics, or applied AI on top of supply-chain or operational data. The common thread is shipping things that other people use, not just decks they read."
+    }
+  ];
+
+  const qBtns = document.querySelectorAll('.iq-btn');
+  const ixq = document.getElementById('ixq');
+  const ixa = document.getElementById('ixa');
+
+  qBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const i = +btn.dataset.q;
+      qBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // animate out
+      ixq.classList.remove('show');
+      ixa.classList.remove('show');
+      setTimeout(() => {
+        ixq.innerHTML = QA[i].q;
+        ixa.innerHTML = QA[i].a;
+        requestAnimationFrame(() => {
+          ixq.classList.add('show');
+          ixa.classList.add('show');
+        });
+      }, 250);
+    });
+  });
+</script>
+
+</body>
+</html>
